@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบคำนวณภาษีออนไลน์</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <style>
+        :root {
+            --primary-color: #072956;
+            --secondary-color: #f08018;
+            --light-color: #ffffff;
+            --dark-color: #000000;
+        }
+        
+        body {
+            font-family: 'Sarabun', sans-serif;
+            padding-top: 80px;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color) !important;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand, .nav-link {
+            color: var(--light-color) !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--secondary-color) !important;
+        }
+        
+        .dropdown-menu {
+            background-color: var(--primary-color);
+        }
+        
+        .dropdown-item {
+            color: var(--light-color);
+        }
+        
+        .dropdown-item:hover {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        .calculator-card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .calculator-header {
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 10px 10px 0 0;
+            padding: 15px;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
+        
+        .btn-primary:hover {
+            background-color: #051e42;
+            border-color: #051e42;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #d96c0c;
+            border-color: #d96c0c;
+            color: var(--light-color);
+        }
+        
+        .result-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary-color);
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+        
+        .tax-info-card {
+            transition: transform 0.3s;
+            height: 100%;
+        }
+        
+        .tax-info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .info-section {
+            padding: 40px 0;
+        }
+        
+        .section-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        
+        footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .calculator-card {
+                margin-bottom: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <i class="bi bi-calculator-fill"></i> ระบบคำนวณภาษี
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="calculateDropdown" role="button" data-bs-toggle="dropdown">
+                            คำนวณภาษี
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#personalTaxCalc">ภาษีเงินได้บุคคลธรรมดา (ภ.ง.ด.90/91)</a></li>
+                            <li><a class="dropdown-item" href="#signTaxCalc">ภาษีป้าย</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="basicTaxDropdown" role="button" data-bs-toggle="dropdown">
+                            ภาษีพื้นฐานที่ทุกคนต้องรู้
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#personalTaxInfo">ภาษีเงินได้บุคคลธรรมดา</a></li>
+                            <li><a class="dropdown-item" href="#corporateTaxInfo">ภาษีเงินได้นิติบุคคล</a></li>
+                            <li><a class="dropdown-item" href="#vatInfo">ภาษีมูลค่าเพิ่ม (VAT)</a></li>
+                            <li><a class="dropdown-item" href="#withholdingTaxInfo">ภาษีหัก ณ ที่จ่าย</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="localTaxDropdown" role="button" data-bs-toggle="dropdown">
+                            ภาษีท้องถิ่นและทรัพย์สิน
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#signTaxInfo">ภาษีป้าย</a></li>
+                            <li><a class="dropdown-item" href="#landTaxInfo">ภาษีที่ดินและสิ่งปลูกสร้าง</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="specificTaxDropdown" role="button" data-bs-toggle="dropdown">
+                            ภาษีเฉพาะกิจ/ตามประเภทธุรกิจ
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#exciseTaxInfo">ภาษีสรรพสามิต</a></li>
+                            <li><a class="dropdown-item" href="#customsTaxInfo">ภาษีศุลกากร</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="relatedTaxDropdown" role="button" data-bs-toggle="dropdown">
+                            สิ่งที่เกี่ยวข้องกับภาษี
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#taxCalendar">กำหนดเวลาการยื่นภาษี</a></li>
+                            <li><a class="dropdown-item" href="#taxPenalties">ค่าปรับและเงินเพิ่ม</a></li>
+                            <li><a class="dropdown-item" href="#taxBenefits">สิทธิประโยชน์ทางภาษี</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="row align-items-center my-5">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold mb-4" style="color: var(--primary-color);">คำนวณภาษีอย่างถูกต้องและง่ายดาย</h1>
+                <p class="lead mb-4">ระบบคำนวณภาษีออนไลน์ที่ช่วยให้คุณคำนวณภาษีต่างๆ ได้ด้วยตัวเอง พร้อมข้อมูลความรู้เกี่ยวกับภาษีที่จำเป็น</p>
+                <a href="#calculators" class="btn btn-secondary btn-lg">เริ่มคำนวณภาษี</a>
+            </div>
+            <div class="col-lg-6">
+                <img src="https://via.placeholder.com/500x300/072956/ffffff?text=Tax+Calculation" class="img-fluid rounded" alt="Tax Calculation">
+            </div>
+        </div>
+
+        <!-- Tax Calculators Section -->
+        <section id="calculators" class="info-section">
+            <h2 class="section-title">คำนวณภาษี</h2>
+            
+            <!-- Personal Income Tax Calculator -->
+            <div id="personalTaxCalc" class="calculator-card card mb-5">
+                <div class="calculator-header">
+                    <h3><i class="bi bi-person-fill"></i> ภาษีเงินได้บุคคลธรรมดา (ภ.ง.ด.90/91)</h3>
+                </div>
+                <div class="card-body">
+                    <form id="personalTaxForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="income" class="form-label">รายได้ทั้งปี (บาท)</label>
+                                <input type="number" class="form-control" id="income" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="expenses" class="form-label">ค่าใช้จ่าย (บาท) (40% ของรายได้ สูงสุดไม่เกิน 100,000 บาท)</label>
+                                <input type="number" class="form-control" id="expenses" readonly>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="allowances" class="form-label">ค่าลดหย่อนส่วนตัว (บาท)</label>
+                                <input type="number" class="form-control" id="allowances" value="60000" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="additionalAllowances" class="form-label">ค่าลดหย่อนเพิ่มเติม (บาท)</label>
+                                <input type="number" class="form-control" id="additionalAllowances" value="0">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="socialSecurity" class="form-label">ประกันสังคม (บาท)</label>
+                                <input type="number" class="form-control" id="socialSecurity" value="0" max="9000">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="insurance" class="form-label">เบี้ยประกันชีวิต (บาท)</label>
+                                <input type="number" class="form-control" id="insurance" value="0" max="100000">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for "providentFund" class="form-label">กองทุนสำรองเลี้ยงชีพ (บาท)</label>
+                                <input type="number" class="form-control" id="providentFund" value="0" max="500000">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="rmf" class="form-label">กองทุน RMF (บาท)</label>
+                                <input type="number" class="form-control" id="rmf" value="0" max="500000">
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="ssf" class="form-label">กองทุน SSF (บาท)</label>
+                                <input type="number" class="form-control" id="ssf" value="0" max="200000">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="donations" class="form-label">เงินบริจาค (บาท)</label>
+                                <input type="number" class="form-control" id="donations" value="0">
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" onclick="calculatePersonalTax()">คำนวณภาษี</button>
+                        <button type="reset" class="btn btn-outline-secondary">ล้างข้อมูล</button>
+                    </form>
+                    
+                    <div id="personalTaxResult" class="result-box" style="display: none;">
+                        <h4>ผลการคำนวณภาษี</h4>
+                        <p>รายได้สุทธิ: <span id="netIncome">0</span> บาท</p>
+                        <p>ภาษีที่ต้องชำระ: <span id="taxAmount">0</span> บาท</p>
+                        <p>ภาษีหลังจากหักค่าลดหย่อน: <span id="finalTax">0</span> บาท</p>
+                        <button class="btn btn-secondary mt-2" onclick="printResult('personalTaxResult')">พิมพ์ผลลัพธ์</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sign Tax Calculator -->
+            <div id="signTaxCalc" class="calculator-card card mb-5">
+                <div class="calculator-header">
+                    <h3><i class="bi bi-signpost-fill"></i> ภาษีป้าย</h3>
+                </div>
+                <div class="card-body">
+                    <form id="signTaxForm">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="signType" class="form-label">ประเภทป้าย</label>
+                                <select class="form-select" id="signType" onchange="updateSignRate()">
+                                    <option value="1">ป้ายที่มีคำภาษาไทย</option>
+                                    <option value="2">ป้ายที่ไม่มีคำภาษาไทย</option>
+                                    <option value="3">ป้ายที่มีทั้งคำไทยและภาษาต่างประเทศ</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="signSize" class="form-label">ขนาดป้าย (ตารางเมตร)</label>
+                                <input type="number" class="form-control" id="signSize" min="0.1" step="0.1" required>
+                            </div>
+                        </div>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="signRate" class="form-label">อัตราภาษี (บาท/ตารางเมตร)</label>
+                                <input type="number" class="form-control" id="signRate" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="signAmount" class="form-label">จำนวนป้าย</label>
+                                <input type="number" class="form-control" id="signAmount" value="1" min="1" required>
+                            </div>
+                        </div>
+                        
+                        <button type="button" class="btn btn-primary" onclick="calculateSignTax()">คำนวณภาษี</button>
+                        <button type="reset" class="btn btn-outline-secondary">ล้างข้อมูล</button>
+                    </form>
+                    
+                    <div id="signTaxResult" class="result-box" style="display: none;">
+                        <h4>ผลการคำนวณภาษีป้าย</h4>
+                        <p>อัตราภาษี: <span id="taxRate">0</span> บาท/ตารางเมตร</p>
+                        <p>พื้นที่ป้ายทั้งหมด: <span id="totalArea">0</span> ตารางเมตร</p>
+                        <p>ภาษีป้ายที่ต้องชำระ: <span id="signTaxAmount">0</span> บาท</p>
+                        <button class="btn btn-secondary mt-2" onclick="printResult('signTaxResult')">พิมพ์ผลลัพธ์</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tax Information Section -->
+        <section id="taxInformation" class="info-section">
+            <h2 class="section-title">ความรู้ด้านภาษี</h2>
+            
+            <div class="row">
+                <!-- Personal Tax Info -->
+                <div class="col-md-6 mb-4">
+                    <div id="personalTaxInfo" class="tax-info-card card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">ภาษีเงินได้บุคคลธรรมดา</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>ภาษีที่รัฐจัดเก็บจากบุคคลธรรมดาที่มีรายได้เกิดขึ้นในปีภาษี ซึ่งคำนวณจากรายได้หลังหักค่าใช้จ่ายและค่าลดหย่อนต่างๆ</p>
+                            <h6>ขั้นตอนการยื่นภาษี:</h6>
+                            <ol>
+                                <li>เตรียมเอกสารการหักค่าใช้จ่ายและลดหย่อน</li>
+                                <li>คำนวณรายได้และภาษี</li>
+                                <li>ยื่นแบบแสดงรายการภาษี ภ.ง.ด.90 หรือ 91</li>
+                                <li>ชำระภาษี (หากมี)</li>
+                            </ol>
+                            <p class="fw-bold">กำหนดยื่นภาษี: ภายในเดือนมีนาคม - เมษายนของทุกปี</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Corporate Tax Info -->
+                <div class="col-md-6 mb-4">
+                    <div id="corporateTaxInfo" class="tax-info-card card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">ภาษีเงินได้นิติบุคคล</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>ภาษีที่จัดเก็บจากนิติบุคคลหรือบริษัทที่มีรายได้เกิดขึ้นในปีภาษี โดยคำนวณจากกำไรสุทธิหลังจากหักค่าใช้จ่ายทั้งหมดแล้ว</p>
+                            <h6>ประเภทแบบแสดงรายการ:</h6>
+                            <ul>
+                                <li>ภ.ง.ด.50: สำหรับบริษัทที่มีทุนจดทะเบียนไม่เกิน 5 ล้านบาท</li>
+                                <li>ภ.ง.ด.51: สำหรับบริษัทที่มีทุนจดทะเบียนเกิน 5 ล้านบาท</li>
+                            </ul>
+                            <p class="fw-bold">กำหนดยื่นภาษี: ภายใน 150 วันหลังจากวันที่สิ้นสุดรอบระยะเวลาบัญชี</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- VAT Info -->
+                <div class="col-md-6 mb-4">
+                    <div id="vatInfo" class="tax-info-card card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">ภาษีมูลค่าเพิ่ม (VAT)</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>ภาษีทางอ้อมที่เก็บจากการขายสินค้าหรือบริการในแต่ละขั้นตอนการผลิตและการจำหน่ายในอัตรา 7%</p>
+                            <h6>ผู้มีหน้าที่เสียภาษี:</h6>
+                            <p>ผู้ประกอบการที่มีรายรับเกิน 1.8 ล้านบาท/ปี ต้องยื่นแบบ ภ.พ.30</p>
+                            <h6>กำหนดยื่นภาษี:</h6>
+                            <p>ภายในวันที่ 15 ของเดือนถัดจากเดือนที่มีการขายสินค้าหรือบริการ</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Withholding Tax Info -->
+                <div class="col-md-6 mb-4">
+                    <div id="withholdingTaxInfo" class="tax-info-card card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">ภาษีหัก ณ ที่จ่าย</h5>
+                        </div>
+                        <div class="card-body">
+                            <p>ภาษีที่ผู้จ่ายเงินต้องหักจากเงินที่จ่ายให้กับผู้รับเงิน แล้วนำส่งสรรพากร</p>
+                            <h6>ประเภทแบบแสดงรายการ:</h6>
+                            <ul>
+                                <li>ภ.ง.ด.3: สำหรับภาษีที่หักจากเงินได้เนื่องจากการจ้างงาน</li>
+                                <li>ภ.ง.ด.53: สำหรับภาษีที่หักจากเงินได้อื่นๆ</li>
+                            </ul>
+                            <h6>กำหนดยื่นภาษี:</h6>
+                            <p>ภายในวันที่ 7 ของเดือนถัดจากเดือนที่หักภาษี</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>ระบบคำนวณภาษีออนไลน์</h5>
+                    <p>เครื่องมือช่วยคำนวณภาษีต่างๆ พร้อมข้อมูลความรู้ด้านภาษีที่จำเป็นสำหรับทุกคน</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>ลิงก์ด่วน</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#calculators" class="text-white">คำนวณภาษี</a></li>
+                        <li><a href="#taxInformation" class="text-white">ความรู้ภาษี</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>ติดต่อเรา</h5>
+                    <p>สอบถามเพิ่มเติม: contact@taxcalculator.com</p>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-center">
+                    <p>© 2023 ระบบคำนวณภาษีออนไลน์. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Personal Income Tax Calculation
+        function calculatePersonalTax() {
+            // Get input values
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const additionalAllowances = parseFloat(document.getElementById('additionalAllowances').value) || 0;
+            const socialSecurity = parseFloat(document.getElementById('socialSecurity').value) || 0;
+            const insurance = parseFloat(document.getElementById('insurance').value) || 0;
+            const providentFund = parseFloat(document.getElementById('providentFund').value) || 0;
+            const rmf = parseFloat(document.getElementById('rmf').value) || 0;
+            const ssf = parseFloat(document.getElementById('ssf').value) || 0;
+            const donations = parseFloat(document.getElementById('donations').value) || 0;
+            
+            // Calculate expenses (40% of income, max 100,000)
+            let expenses = income * 0.4;
+            if (expenses > 100000) expenses = 100000;
+            document.getElementById('expenses').value = expenses.toFixed(2);
+            
+            // Standard allowance
+            const standardAllowance = 60000;
+            
+            // Calculate net income
+            const netIncome = income - expenses - standardAllowance - additionalAllowances - 
+                             socialSecurity - insurance - providentFund - rmf - ssf - donations;
+            
+            // Calculate tax based on progressive tax rates
+            let tax = 0;
+            if (netIncome > 0) {
+                if (netIncome <= 150000) {
+                    tax = 0;
+                } else if (netIncome <= 300000) {
+                    tax = (netIncome - 150000) * 0.05;
+                } else if (netIncome <= 500000) {
+                    tax = 7500 + (netIncome - 300000) * 0.10;
+                } else if (netIncome <= 750000) {
+                    tax = 27500 + (netIncome - 500000) * 0.15;
+                } else if (netIncome <= 1000000) {
+                    tax = 65000 + (netIncome - 750000) * 0.20;
+                } else if (netIncome <= 2000000) {
+                    tax = 115000 + (netIncome - 1000000) * 0.25;
+                } else if (netIncome <= 5000000) {
+                    tax = 365000 + (netIncome - 2000000) * 0.30;
+                } else {
+                    tax = 1265000 + (netIncome - 5000000) * 0.35;
+                }
+            }
+            
+            // Apply tax credit (if any)
+            const taxCredit = 0; // Can be implemented based on conditions
+            
+            // Final tax amount
+            const finalTax = Math.max(0, tax - taxCredit);
+            
+            // Display results
+            document.getElementById('netIncome').textContent = netIncome.toFixed(2);
+            document.getElementById('taxAmount').textContent = tax.toFixed(2);
+            document.getElementById('finalTax').textContent = finalTax.toFixed(2);
+            document.getElementById('personalTaxResult').style.display = 'block';
+        }
+        
+        // Update sign tax rate based on selected type
+        function updateSignRate() {
+            const signType = document.getElementById('signType').value;
+            let rate = 0;
+            
+            switch(signType) {
+                case '1': // Thai signs
+                    rate = 20;
+                    break;
+                case '2': // Non-Thai signs
+                    rate = 40;
+                    break;
+                case '3': // Mixed signs
+                    rate = 30;
+                    break;
+            }
+            
+            document.getElementById('signRate').value = rate;
+        }
+        
+        // Calculate sign tax
+        function calculateSignTax() {
+            const signSize = parseFloat(document.getElementById('signSize').value) || 0;
+            const signAmount = parseInt(document.getElementById('signAmount').value) || 1;
+            const taxRate = parseFloat(document.getElementById('signRate').value) || 0;
+            
+            const totalArea = signSize * signAmount;
+            const taxAmount = totalArea * taxRate;
+            
+            // Display results
+            document.getElementById('taxRate').textContent = taxRate;
+            document.getElementById('totalArea').textContent = totalArea.toFixed(2);
+            document.getElementById('signTaxAmount').textContent = taxAmount.toFixed(2);
+            document.getElementById('signTaxResult').style.display = 'block';
+        }
+        
+        // Print result function
+        function printResult(elementId) {
+            const printContent = document.getElementById(elementId).innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+        
+        // Initialize sign tax rate on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateSignRate();
+            
+            // Auto-calculate expenses when income changes
+            document.getElementById('income').addEventListener('input', function() {
+                const income = parseFloat(this.value) || 0;
+                let expenses = income * 0.4;
+                if (expenses > 100000) expenses = 100000;
+                document.getElementById('expenses').value = expenses.toFixed(2);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1153 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ภาษีสำหรับผู้ค้ารายย่อย 2025</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --success-color: #27ae60;
+        }
+        
+        body {
+            font-family: 'Sarabun', 'Kanit', sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.7;
+        }
+        
+        .navbar {
+            background-color: var(--primary-color);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(44, 62, 80, 0.8), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1563014959-7aaa83350992?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        
+        .section-title {
+            position: relative;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+        }
+        
+        .card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            height: 100%;
+            border: none;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .card-header {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 600;
+            padding: 15px 20px;
+        }
+        
+        .tax-badge {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 30px 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+            height: 100%;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .feature-box i {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+        
+        .tax-flowchart {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .flow-step {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+        
+        .flow-step:not(:last-child):after {
+            content: '→';
+            position: absolute;
+            right: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--secondary-color);
+        }
+        
+        .flow-icon {
+            width: 70px;
+            height: 70px;
+            background-color: var(--light-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+        }
+        
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: var(--secondary-color);
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            width: 50%;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 50%;
+        }
+        
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+            text-align: right;
+        }
+        
+        .timeline-item:nth-child(even) {
+            padding-left: 40px;
+        }
+        
+        .timeline-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .timeline-content:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--secondary-color);
+            border-radius: 50%;
+            top: 20px;
+        }
+        
+        .timeline-item:nth-child(odd) .timeline-content:after {
+            right: -50px;
+        }
+        
+        .timeline-item:nth-child(even) .timeline-content:after {
+            left: -50px;
+        }
+        
+        .faq-item {
+            margin-bottom: 15px;
+        }
+        
+        .faq-question {
+            background-color: var(--light-color);
+            padding: 15px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .faq-question:after {
+            content: '\f107';
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            position: absolute;
+            right: 20px;
+            transition: transform 0.3s;
+        }
+        
+        .faq-question.collapsed:after {
+            transform: rotate(0deg);
+        }
+        
+        .faq-question:not(.collapsed):after {
+            transform: rotate(-180deg);
+        }
+        
+        .faq-answer {
+            padding: 20px;
+            background-color: white;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .calculator-box {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .download-btn {
+            background-color: var(--success-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .download-btn i {
+            margin-right: 8px;
+        }
+        
+        .download-btn:hover {
+            background-color: #219653;
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer a {
+            color: #bdc3c7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer a:hover {
+            color: white;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            margin-right: 10px;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            background-color: rgba(0,0,0,0.2);
+            padding: 15px 0;
+            margin-top: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .timeline:before {
+                left: 20px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 40px;
+                padding-right: 0;
+                text-align: left;
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) {
+                padding-right: 0;
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content:after {
+                left: -30px;
+                right: auto;
+            }
+            
+            .flow-step:not(:last-child):after {
+                content: '↓';
+                right: 50%;
+                top: auto;
+                bottom: -30px;
+                left: auto;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">
+                <i class="fas fa-file-invoice-dollar me-2"></i>ภาษีผู้ค้ารายย่อย
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#overview">ภาพรวม</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#personal-tax">ภ.ง.ด.90/94</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#withholding-tax">หัก ณ ที่จ่าย</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#ecommerce-tax">ค้าขายออนไลน์</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#tools">เครื่องมือ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">ติดต่อ</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-3">ภาษีสำหรับผู้ค้ารายย่อย 2025</h1>
+            <p class="lead mb-4">คู่มือภาษีฉบับเข้าใจง่ายสำหรับพ่อค้าแม่ค้าออนไลน์ ร้านเล็ก และฟรีแลนซ์</p>
+            <div class="d-flex justify-content-center flex-wrap">
+                <a href="#personal-tax" class="btn btn-primary btn-lg me-3 mb-3">
+                    <i class="fas fa-calculator me-2"></i>คำนวณภาษี
+                </a>
+                <a href="#tools" class="btn btn-outline-light btn-lg mb-3">
+                    <i class="fas fa-download me-2"></i>ดาวน์โหลดฟรี
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="overview" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">ภาษีคืออะไร? ทำไมต้องจ่าย?</h2>
+                <p class="lead">ภาษีคือเงินสมทบที่ประชาชนจ่ายให้รัฐบาล เพื่อนำไปพัฒนาประเทศและจัดบริการสาธารณะ</p>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">กลุ่มเป้าหมาย</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-store me-2 text-primary"></i>พ่อค้าแม่ค้าออนไลน์</li>
+                                <li class="list-group-item"><i class="fas fa-coffee me-2 text-primary"></i>ร้านค้าเล็ก</li>
+                                <li class="list-group-item"><i class="fas fa-laptop-code me-2 text-primary"></i>ฟรีแลนซ์</li>
+                                <li class="list-group-item"><i class="fas fa-user-tie me-2 text-primary"></i>ผู้ประกอบการรายย่อย</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">ประโยชน์ของการเสียภาษีถูกต้อง</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"><i class="fas fa-check-circle me-2 text-success"></i>ไม่โดนปรับและดอกเบี้ย</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle me-2 text-success"></i>สร้างเครดิตทางการเงิน</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle me-2 text-success"></i>สามารถขอสินเชื่อได้ง่ายขึ้น</li>
+                                <li class="list-group-item"><i class="fas fa-check-circle me-2 text-success"></i>แสดงความน่าเชื่อถือทางธุรกิจ</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mb-5">
+                <h3 class="mb-4 text-center">ตารางภาษีที่เกี่ยวข้องและกำหนดเวลายื่น</h3>
+                <div class="table-responsive">
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-primary">
+                            <tr>
+                                <th>ประเภทภาษี</th>
+                                <th>กำหนดเวลายื่น</th>
+                                <th>ผู้ที่ต้องยื่น</th>
+                                <th>อัตราภาษี</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>ภ.ง.ด.90 (ยื่นปี)</td>
+                                <td>ม.ค. - มี.ค. 2566</td>
+                                <td>บุคคลธรรมดาที่มีรายได้</td>
+                                <td>0-35% (ขั้นบันได)</td>
+                            </tr>
+                            <tr>
+                                <td>ภ.ง.ด.94 (ยื่นครึ่งปี)</td>
+                                <td>ก.ย. 2566</td>
+                                <td>ผู้มีเงินได้ประเภทที่ 8</td>
+                                <td>0.5-35% (ขั้นบันได)</td>
+                            </tr>
+                            <tr>
+                                <td>ภาษีหัก ณ ที่จ่าย</td>
+                                <td>วันที่ 7 ของเดือนถัดไป</td>
+                                <td>ผู้จ่ายเงินให้บุคคลอื่น</td>
+                                <td>1-5%</td>
+                            </tr>
+                            <tr>
+                                <td>ภาษีมูลค่าเพิ่ม (VAT)</td>
+                                <td>วันที่ 15 ของเดือนถัดไป</td>
+                                <td>ผู้มีรายได้เกิน 1.8 ล้านบาท/ปี</td>
+                                <td>7%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="text-center mb-4">
+                <h3 class="mb-3">Flowchart ภาษี</h3>
+                <p class="text-muted">เริ่มต้นจาก "คุณมีรายได้ไหม?" ไปจนถึง "ต้องยื่นแบบภาษีอะไร?"</p>
+            </div>
+            <div class="tax-flowchart mb-5">
+                <div class="row justify-content-center">
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <h6>มีรายได้?</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-calculator"></i>
+                            </div>
+                            <h6>คำนวณรายได้รวม</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h6>จัดเตรียมเอกสาร</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-balance-scale"></i>
+                            </div>
+                            <h6>หักค่าใช้จ่าย/ลดหย่อน</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-file-invoice"></i>
+                            </div>
+                            <h6>เลือกแบบฟอร์มที่ถูกต้อง</h6>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-4 col-6 mb-4">
+                        <div class="flow-step">
+                            <div class="flow-icon">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <h6>ยื่นภาษีภายในกำหนด</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Personal Tax Section -->
+    <section id="personal-tax" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">ภาษีเงินได้บุคคลธรรมดา (ภ.ง.ด.90 และ 94)</h2>
+            </div>
+            
+            <div class="row">
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">ภ.ง.ด.90</div>
+                        <div class="card-body">
+                            <h5 class="card-title">ยื่นสิ้นปี (ม.ค. - มี.ค.)</h5>
+                            <p class="card-text"><strong>สำหรับผู้มีเงินได้หลายแหล่ง</strong></p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">คำนวณจากรายได้ทั้งปี</li>
+                                <li class="list-group-item">ต้องยื่นภายในมีนาคมของปีถัดไป</li>
+                                <li class="list-group-item">เหมาะสำหรับผู้มีรายได้จากหลายแหล่ง</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-download me-2"></i>ดาวน์โหลดแบบฟอร์ม
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">ภ.ง.ด.94</div>
+                        <div class="card-body">
+                            <h5 class="card-title">ยื่นครึ่งปี (เม.ย. - ก.ย.)</h5>
+                            <p class="card-text"><strong>สำหรับผู้มีเงินได้ประเภทที่ 8</strong></p>
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item">คำนวณจากรายได้ครึ่งปีแรก</li>
+                                <li class="list-group-item">ยื่นภายในเดือนกันยายน</li>
+                                <li class="list-group-item">ชำระภาษีล่วงหน้า</li>
+                            </ul>
+                            <a href="#" class="btn btn-primary">
+                                <i class="fas fa-download me-2"></i>ดาวน์โหลดแบบฟอร์ม
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">วิธีคำนวณภาษี</div>
+                        <div class="card-body">
+                            <p class="card-text">เงินได้สุทธิ = รายได้รวม - ค่าใช้จ่าย - ค่าลดหย่อน</p>
+                            <div class="bg-light p-3 rounded mb-3">
+                                <h6>อัตราภาษีเงินได้บุคคลธรรมดา (2566)</h6>
+                                <ul class="list-unstyled">
+                                    <li>0 - 150,000 บาท: ได้รับยกเว้น</li>
+                                    <li>150,001 - 300,000 บาท: 5%</li>
+                                    <li>300,001 - 500,000 บาท: 10%</li>
+                                    <li>500,001 - 750,000 บาท: 15%</li>
+                                    <li>750,001 - 1,000,000 บาท: 20%</li>
+                                    <li>1,000,001 - 2,000,000 บาท: 25%</li>
+                                    <li>2,000,001 - 5,000,000 บาท: 30%</li>
+                                    <li>5,000,001 บาทขึ้นไป: 35%</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">ตัวอย่างกรณีศึกษา</div>
+                        <div class="card-body">
+                            <h5 class="card-title">ร้านขายเสื้อผ้าออนไลน์</h5>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">รายได้รวมทั้งปี: 500,000 บาท</li>
+                                <li class="list-group-item">ค่าใช้จ่าย (40%): 200,000 บาท</li>
+                                <li class="list-group-item">ค่าลดหย่อน: 100,000 บาท</li>
+                                <li class="list-group-item">เงินได้สุทธิ: 200,000 บาท</li>
+                                <li class="list-group-item list-group-item-success">
+                                    <strong>ภาษีที่ต้องจ่าย:</strong> 
+                                    (200,000 - 150,000) × 5% = 2,500 บาท
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mt-4">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">ช่องทางยื่นภาษี</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <h5>เว็บไซต์กรมสรรพากร</h5>
+                                    <p>ยื่นภาษีออนไลน์ผ่านระบบ e-Filing</p>
+                                    <a href="https://www.rd.go.th" target="_blank" class="btn btn-outline-primary">
+                                        <i class="fas fa-external-link-alt me-2"></i>www.rd.go.th
+                                    </a>
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>แอปพลิเคชัน RD Smart Tax</h5>
+                                    <p>ยื่นภาษีผ่านมือถือสะดวกทุกที่</p>
+                                    <div class="d-flex">
+                                        <a href="#" class="btn btn-dark me-2">
+                                            <i class="fab fa-apple me-2"></i>App Store
+                                        </a>
+                                        <a href="#" class="btn btn-dark">
+                                            <i class="fab fa-google-play me-2"></i>Play Store
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Withholding Tax Section -->
+    <section id="withholding-tax" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">ภาษีหัก ณ ที่จ่าย</h2>
+                <p class="lead">สำหรับผู้ว่าจ้างงานหรือจ่ายเงินให้บุคคลอื่น</p>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">ใครเกี่ยวข้องบ้าง?</div>
+                        <div class="card-body">
+                            <div class="d-flex flex-wrap">
+                                <span class="tax-badge"><i class="fas fa-user me-2"></i>ฟรีแลนซ์</span>
+                                <span class="tax-badge"><i class="fas fa-file-invoice me-2"></i>ผู้รับจ้างอิสระ</span>
+                                <span class="tax-badge"><i class="fas fa-building me-2"></i>ค่าเช่า</span>
+                                <span class="tax-badge"><i class="fas fa-gem me-2"></i>ค่าลิขสิทธิ์</span>
+                            </div>
+                            <div class="mt-4">
+                                <h5>อัตราการหักภาษี</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">ฟรีแลนซ์ / ผู้รับจ้างอิสระ: <span class="badge bg-danger">3%</span></li>
+                                    <li class="list-group-item">ค่าเช่าอสังหาริมทรัพย์: <span class="badge bg-danger">5%</span></li>
+                                    <li class="list-group-item">ค่าลิขสิทธิ์: <span class="badge bg-danger">5%</span></li>
+                                    <li class="list-group-item">บริการวิชาชีพ: <span class="badge bg-danger">3%</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">ขั้นตอนสำหรับผู้ว่าจ้าง</div>
+                        <div class="card-body">
+                            <div class="timeline">
+                                <div class="timeline-item">
+                                    <div class="timeline-content">
+                                        <h5>หักภาษี ณ ที่จ่าย</h5>
+                                        <p>หักภาษีตามอัตราที่กำหนดก่อนจ่ายเงินให้ผู้รับ</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-content">
+                                        <h5>ออกหนังสือรับรอง</h5>
+                                        <p>ออกหนังสือรับรองการหักภาษี ณ ที่จ่าย (แบบ 50 ทวิ)</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-content">
+                                        <h5>ยื่นแบบภาษี</h5>
+                                        <p>ยื่นแบบภาษีหัก ณ ที่จ่าย (ภ.ง.ด.3 หรือ ภ.ง.ด.53)</p>
+                                    </div>
+                                </div>
+                                <div class="timeline-item">
+                                    <div class="timeline-content">
+                                        <h5>ชำระเงิน</h5>
+                                        <p>ชำระเงินเข้ารัฐภายในวันที่ 7 ของเดือนถัดไป</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">ตัวอย่างแบบฟอร์มและวิธีกรอก</div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>แบบฟอร์ม 50 ทวิ</h5>
+                                    <p>หนังสือรับรองการหักภาษี ณ ที่จ่าย</p>
+                                    <img src="https://via.placeholder.com/500x300?text=ตัวอย่างแบบฟอร์ม+50+ทวิ" class="img-fluid rounded mb-3" alt="แบบฟอร์ม 50 ทวิ">
+                                </div>
+                                <div class="col-md-6">
+                                    <h5>แบบฟอร์ม ภ.ง.ด.3</h5>
+                                    <p>แบบแสดงรายการภาษีที่หัก ณ ที่จ่าย</p>
+                                    <img src="https://via.placeholder.com/500x300?text=ตัวอย่างแบบฟอร์ม+ภ.ง.ด.3" class="img-fluid rounded mb-3" alt="แบบฟอร์ม ภ.ง.ด.3">
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <a href="#" class="download-btn">
+                                    <i class="fas fa-file-pdf me-2"></i>คู่มือการกรอกแบบฟอร์ม
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- E-Commerce Tax Section -->
+    <section id="ecommerce-tax" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">การเสียภาษีกรณีค้าขายออนไลน์</h2>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-gavel"></i>
+                        <h4>กฎหมายที่เกี่ยวข้อง</h4>
+                        <p>e-Payment Law กำหนดให้ธนาคารและสถาบันการเงินรายงานข้อมูลการทำธุรกรรมให้กรมสรรพากร</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h4>เกณฑ์การเสียภาษี</h4>
+                        <p>รายได้เกิน 1.8 ล้านบาท/ปี ต้องจดทะเบียน VAT และยื่นภาษีมูลค่าเพิ่ม</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="feature-box">
+                        <i class="fas fa-file-invoice"></i>
+                        <h4>การเก็บหลักฐาน</h4>
+                        <p>เก็บหลักฐานทุกการซื้อขาย เช่น statement, สลิปโอน, ใบเสร็จ อย่างน้อย 5 ปี</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">เลือกประเภทภาษีให้ถูกต้อง</div>
+                        <div class="card-body">
+                            <h5>บุคคลธรรมดา</h5>
+                            <ul class="mb-4">
+                                <li>รายได้ต่ำกว่า 30 ล้านบาท/ปี</li>
+                                <li>ยื่นแบบ ภ.ง.ด.90/94</li>
+                                <li>เสียภาษีตามขั้นบันได 0-35%</li>
+                            </ul>
+                            
+                            <h5>นิติบุคคล (จดบริษัท)</h5>
+                            <ul>
+                                <li>รายได้มากกว่า 30 ล้านบาท/ปี</li>
+                                <li>ยื่นแบบ ภ.ง.ด.50</li>
+                                <li>เสียภาษีในอัตรา 20%</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">Case Study: ร้านขายขนมออนไลน์</div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">รายได้ปี 2565: 1,200,000 บาท</li>
+                                <li class="list-group-item">ค่าใช้จ่าย (วัตถุดิบ, ค่าขนส่ง, ค่าแพ็คเกจจิ้ง): 600,000 บาท</li>
+                                <li class="list-group-item">ค่าลดหย่อนส่วนตัว: 100,000 บาท</li>
+                                <li class="list-group-item">เงินได้สุทธิ: 500,000 บาท</li>
+                                <li class="list-group-item list-group-item-success">
+                                    <strong>ภาษีที่ต้องจ่าย:</strong> 
+                                    (150,000×0%) + (150,000×5%) + (200,000×10%) = 7,500 + 20,000 = 27,500 บาท
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">เคล็ดลับลดความเสี่ยงโดนตรวจสอบ</div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-success fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>ทำบัญชีรายรับ-รายจ่ายประจำวัน</h5>
+                                    <p class="mb-0">บันทึกการเงินทุกวัน แยกบัญชีส่วนตัวและธุรกิจ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-success fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>เก็บหลักฐานการเงินครบถ้วน</h5>
+                                    <p class="mb-0">เก็บใบเสร็จ ใบกำกับภาษี และสลิปโอนทั้งหมด</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-success fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>ยื่นภาษีตรงเวลา</h5>
+                                    <p class="mb-0">ยื่นภาษีให้ตรงเวลาทุกปี เพื่อหลีกเลี่ยงค่าปรับ</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="me-3">
+                                    <i class="fas fa-check-circle text-success fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5>ใช้โปรแกรมบัญชีออนไลน์</h5>
+                                    <p class="mb-0">ใช้แอปหรือซอฟต์แวร์ช่วยจัดการบัญชี</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Section -->
+    <section id="tools" class="py-5">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">เครื่องมือและดาวน์โหลด</h2>
+            </div>
+            
+            <div class="row mb-5">
+                <div class="col-lg-6 mb-4">
+                    <div class="calculator-box">
+                        <h3 class="mb-4">เครื่องคิดภาษีออนไลน์</h3>
+                        <div class="mb-3">
+                            <label class="form-label">รายได้รวมทั้งปี (บาท)</label>
+                            <input type="number" class="form-control" id="income" value="500000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ค่าใช้จ่าย (บาท)</label>
+                            <input type="number" class="form-control" id="expenses" value="200000">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">ค่าลดหย่อน (บาท)</label>
+                            <input type="number" class="form-control" id="deductions" value="100000">
+                        </div>
+                        <button class="btn btn-primary w-100" id="calculate-btn">
+                            <i class="fas fa-calculator me-2"></i>คำนวณภาษี
+                        </button>
+                        <div class="mt-4 p-3 bg-light rounded d-none" id="result-box">
+                            <h5>ผลการคำนวณ</h5>
+                            <p id="tax-result"></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header">ดาวน์โหลดฟรี</div>
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="bg-light p-3 rounded-circle me-3">
+                                    <i class="fas fa-file-pdf text-danger fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">Checklist เอกสารยื่นภาษี</h5>
+                                    <p class="mb-0">เอกสารที่ต้องเตรียมสำหรับการยื่นภาษี</p>
+                                </div>
+                                <a href="#" class="download-btn ms-auto">
+                                    <i class="fas fa-download me-2"></i>ดาวน์โหลด
+                                </a>
+                            </div>
+                            
+                            <div class="d-flex align-items-center mb-4">
+                                <div class="bg-light p-3 rounded-circle me-3">
+                                    <i class="fas fa-calendar-alt text-primary fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">ปฏิทินภาษี 2025</h5>
+                                    <p class="mb-0">กำหนดเวลายื่นภาษีตลอดปี 2566</p>
+                                </div>
+                                <a href="#" class="download-btn ms-auto">
+                                    <i class="fas fa-download me-2"></i>ดาวน์โหลด
+                                </a>
+                            </div>
+                            
+                            <div class="d-flex align-items-center">
+                                <div class="bg-light p-3 rounded-circle me-3">
+                                    <i class="fas fa-file-excel text-success fa-2x"></i>
+                                </div>
+                                <div>
+                                    <h5 class="mb-0">เทมเพลตบัญชีรายรับ-รายจ่าย</h5>
+                                    <p class="mb-0">ไฟล์ Excel สำหรับบันทึกรายรับรายจ่าย</p>
+                                </div>
+                                <a href="#" class="download-btn ms-auto">
+                                    <i class="fas fa-download me-2"></i>ดาวน์โหลด
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card mb-5">
+                <div class="card-header">คำถามที่พบบ่อย (FAQ)</div>
+                <div class="card-body">
+                    <div class="faq-item">
+                        <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1">
+                            เริ่มมีรายได้เท่าไหร่ถึงต้องเสียภาษี?
+                        </div>
+                        <div class="collapse show" id="faq1">
+                            <div class="faq-answer">
+                                หากมีรายได้สุทธิตั้งแต่ 150,000 บาทขึ้นไปต่อปี ต้องเสียภาษี โดยรายได้สุทธิ = รายได้รวม - ค่าใช้จ่าย - ค่าลดหย่อน
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">
+                            ขายของออนไลน์ต้องเสีย VAT ไหม?
+                        </div>
+                        <div class="collapse" id="faq2">
+                            <div class="faq-answer">
+                                หากมีรายได้เกิน 1.8 ล้านบาทต่อปี ต้องจดทะเบียน VAT และเสียภาษีมูลค่าเพิ่ม 7%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">
+                            ฟรีแลนซ์ควรยื่นภาษีแบบไหน?
+                        </div>
+                        <div class="collapse" id="faq3">
+                            <div class="faq-answer">
+                                ฟรีแลนซ์ควรยื่นแบบ ภ.ง.ด.90 (ยื่นสิ้นปี) และหากมีรายได้มากกว่า 60,000 บาทต่อปี ควรยื่นแบบ ภ.ง.ด.94 ด้วย (ยื่นครึ่งปี)
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">
+                            โดนหัก ณ ที่จ่าย 3% ยังต้องยื่นภาษีอีกไหม?
+                        </div>
+                        <div class="collapse" id="faq4">
+                            <div class="faq-answer">
+                                ต้องยื่นภาษีทุกปี หากมีรายได้ถึงเกณฑ์ที่ต้องเสียภาษี โดยภาษีที่ถูกหัก ณ ที่จ่ายถือเป็นเครดิตภาษี สามารถนำมาหักจากภาษีที่ต้องจ่ายได้
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="section-title d-inline-block">ช่องทางติดต่อกรมสรรพากร</h2>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-phone-alt fa-3x text-primary mb-3"></i>
+                            <h5>โทรศัพท์</h5>
+                            <p class="mb-1">สายด่วน 1161</p>
+                            <p>เวลา 08:30-16:30 น. (จันทร์-ศุกร์)</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-globe fa-3x text-primary mb-3"></i>
+                            <h5>เว็บไซต์</h5>
+                            <p><a href="https://www.rd.go.th" target="_blank">www.rd.go.th</a></p>
+                            <p>บริการยื่นภาษีออนไลน์ e-Filing</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                            <h5>แอปพลิเคชัน</h5>
+                            <p>RD Smart Tax</p>
+                            <div class="d-flex justify-content-center">
+                                <img src="https://via.placeholder.com/100x35?text=App+Store" class="img-fluid me-2" alt="App Store">
+                                <img src="https://via.placeholder.com/100x35?text=Play+Store" class="img-fluid" alt="Play Store">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4">
+                <h4 class="mb-3">ติดตามผ่านโซเชียลมีเดีย</h4>
+                <div>
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-line"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <h4 class="mb-4">ภาษีสำหรับผู้ค้ารายย่อย 2025</h4>
+                    <p>คู่มือภาษีฉบับเข้าใจง่ายสำหรับพ่อค้าแม่ค้าออนไลน์ ร้านเล็ก และฟรีแลนซ์</p>
+                </div>
+                <div class="col-lg-2 col-md-4 mb-4">
+                    <h5 class="mb-4">เมนู</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#overview">ภาพรวม</a></li>
+                        <li class="mb-2"><a href="#personal-tax">ภ.ง.ด.90/94</a></li>
+                        <li class="mb-2"><a href="#withholding-tax">หัก ณ ที่จ่าย</a></li>
+                        <li class="mb-2"><a href="#ecommerce-tax">ค้าขายออนไลน์</a></li>
+                        <li><a href="#tools">เครื่องมือ</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="mb-4">ลิงก์สำคัญ</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="https://www.rd.go.th" target="_blank">กรมสรรพากร</a></li>
+                        <li class="mb-2"><a href="#">แบบฟอร์มภาษี</a></li>
+                        <li class="mb-2"><a href="#">ปฏิทินภาษี</a></li>
+                        <li><a href="#">คำถามที่พบบ่อย</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-4 mb-4">
+                    <h5 class="mb-4">ติดต่อเรา</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="fas fa-phone-alt me-2"></i> 1161</li>
+                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> contact@rd.go.th</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i> กรมสรรพากร ถ.สนามบินน้ำ</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright text-center">
+                <p class="mb-0">© 2025 ภาษีสำหรับผู้ค้ารายย่อย. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Tax calculator function
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            const income = parseFloat(document.getElementById('income').value) || 0;
+            const expenses = parseFloat(document.getElementById('expenses').value) || 0;
+            const deductions = parseFloat(document.getElementById('deductions').value) || 0;
+            
+            const netIncome = income - expenses - deductions;
+            let tax = 0;
+            
+            if (netIncome > 5000000) {
+                tax = (netIncome - 5000000) * 0.35 + 1260000;
+            } else if (netIncome > 2000000) {
+                tax = (netIncome - 2000000) * 0.30 + 365000;
+            } else if (netIncome > 1000000) {
+                tax = (netIncome - 1000000) * 0.25 + 115000;
+            } else if (netIncome > 750000) {
+                tax = (netIncome - 750000) * 0.20 + 65000;
+            } else if (netIncome > 500000) {
+                tax = (netIncome - 500000) * 0.15 + 27500;
+            } else if (netIncome > 300000) {
+                tax = (netIncome - 300000) * 0.10 + 7500;
+            } else if (netIncome > 150000) {
+                tax = (netIncome - 150000) * 0.05;
+            } else {
+                tax = 0;
+            }
+            
+            const resultBox = document.getElementById('result-box');
+            const taxResult = document.getElementById('tax-result');
+            
+            taxResult.innerHTML = `
+                <p>รายได้สุทธิ: <strong>${netIncome.toLocaleString()} บาท</strong></p>
+                <p class="fs-5">ภาษีที่ต้องจ่าย: <strong class="text-success">${tax.toLocaleString()} บาท</strong></p>
+            `;
+            
+            resultBox.classList.remove('d-none');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>

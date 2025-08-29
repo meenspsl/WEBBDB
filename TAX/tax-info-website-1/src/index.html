@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ระบบคำนวณภาษีออนไลน์</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top shadow">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="img/Logobdb.png" alt="Logo" class="logo-img">
+                TAXES YALA BIZ
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="components/tax-calculator.html" id="calculateDropdown" role="button">
+                        คำนวณภาษี
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="components/basic-taxes.html" id="basicTaxDropdown" role="button">
+                            ภาษีพื้นฐานที่ทุกคนต้องรู้
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="components/local-taxes.html" id="localTaxDropdown" role="button">
+                            ภาษีท้องถิ่นและทรัพย์สิน
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="components/special-taxes.html" id="specificTaxDropdown" role="button">
+                            ภาษีเฉพาะกิจ/ตามประเภทธุรกิจ
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="components/tax-related.html" id="relatedTaxDropdown" role="button">
+                            สิ่งที่เกี่ยวข้องกับภาษี
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+        <section class="hero-section" style="background: linear-gradient(135deg, var(--primary-color) 0%, #1a3c6e 100%), url('img/tax-bg.jpg') center/cover no-repeat;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-10"> 
+                        <h1 class="display-4 fw-bold text-white mb-4">จัดการภาษีได้ง่ายๆ <br>ด้วยระบบออนไลน์</h1>
+                        <p class="lead text-light mb-4">คำนวณภาษี ศึกษาข้อมูลภาษี และติดตามกำหนดเวลาการยื่นแบบทั้งหมดในที่เดียว</p>
+                        <div class="d-flex flex-wrap gap-2">
+                            <a href="components/tax-calculator.html" class="btn btn-lg" style="background-color: #f08018; color: white;">
+                                <i class="fas fa-calculator me-2"></i>คำนวณภาษีตอนนี้
+                            </a>
+                            <a href="#features" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-info-circle me-2"></i>เรียนรู้เพิ่มเติม
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 d-none d-lg-block">
+                        <div class="hero-card card border-0 shadow">
+                            <div class="card-body p-4">
+                                <h5 class="card-title mb-3">คำนวณภาษีเงินได้บุคคลธรรมดา</h5>
+                                <form id="quickTaxForm">
+                                    <div class="mb-3">
+                                        <label for="quickIncome" class="form-label">รายได้ทั้งปี (บาท)</label>
+                                        <input type="number" class="form-control" id="quickIncome" placeholder="เช่น 500000">
+                                    </div>
+                                    <button type="button" class="btn w-100" style="background-color: #f08018; color: white;" onclick="quickCalculate()">
+                                        ประเมินภาษีอย่างเร็ว
+                                    </button>
+                                </form>
+                                <div id="quickResult" class="mt-3 p-2 bg-light rounded d-none">
+                                    <p class="mb-1">ภาษีประมาณ: <span id="quickTaxAmount" class="fw-bold">0</span> บาท</p>
+                                    <small class="text-muted">* เป็นการคำนวณเบื้องต้นเท่านั้น</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">บริการของเรา</h2>
+                    <p class="text-muted">ทุกสิ่งที่คุณต้องการเกี่ยวกับการจัดการภาษีในหนึ่งเดียว</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card h-0 border-0 shadow-sm tax-info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-calculator fa-3x" style="color: #f08018;"></i>
+                                </div>
+                                <h4 class="card-title">คำนวณภาษี</h4>
+                                <p class="card-text">คำนวณภาษีเงินได้บุคคลธรรมดาและภาษีป้ายด้วยเครื่องมือที่ง่ายต่อการใช้งาน</p>
+                                <a href="components/tax-calculator.html" class="btn btn-sm mt-3" style="background-color: #072956; color: white;">ใช้เครื่องมือ</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card h-100 border-0 shadow-sm tax-info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-book fa-3x" style="color: #f08018;"></i>
+                                </div>
+                                <h4 class="card-title">ความรู้ภาษี</h4>
+                                <p class="card-text">เรียนรู้เกี่ยวกับภาษีประเภทต่างๆ และวิธีการยื่นแบบอย่างถูกต้อง</p>
+                                <a href="components/basic-taxes.html" class="btn btn-sm mt-3" style="background-color: #072956; color: white;">ศึกษาข้อมูล</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card h-100 border-0 shadow-sm tax-info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-calendar-alt fa-3x" style="color: #f08018;"></i>
+                                </div>
+                                <h4 class="card-title">กำหนดเวลายื่น</h4>
+                                <p class="card-text">ตรวจสอบกำหนดเวลาการยื่นแบบภาษีและหลีกเลี่ยงค่าปรับ</p>
+                                <a href="components/tax-related.html#taxCalendar" class="btn btn-sm mt-3" style="background-color: #072956; color: white;">ดูปฏิทิน</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card h-100 border-0 shadow-sm tax-info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-file-download fa-3x" style="color: #f08018;"></i>
+                                </div>
+                                <h4 class="card-title">แบบฟอร์มภาษี</h4>
+                                <p class="card-text">ดาวน์โหลดแบบฟอร์มภาษีต่างๆ พร้อมคำแนะนำการกรอก</p>
+                                <a href="components/basic-taxes.html" class="btn btn-sm mt-3" style="background-color: #072956; color: white;">ดาวน์โหลด</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 col-lg-4">
+                        <div class="feature-card card h-100 border-0 shadow-sm tax-info-card">
+                            <div class="card-body text-center p-4">
+                                <div class="feature-icon mb-3">
+                                    <i class="fas fa-percentage fa-3x" style="color: #f08018;"></i>
+                                </div>
+                                <h4 class="card-title">ลดหย่อนภาษี</h4>
+                                <p class="card-text">ค้นพบวิธีลดหย่อนภาษีอย่างถูกต้องตามกฎหมาย</p>
+                                <a href="components/tax-related.html#taxBenefits" class="btn btn-sm mt-3" style="background-color: #072956; color: white;">ดูสิทธิ์ลดหย่อน</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- Tax Types Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">ประเภทภาษี</h2>
+                    <p class="text-muted">เรียนรู้เกี่ยวกับภาษีประเภทต่างๆ ที่คุณอาจต้องจ่าย</p>
+                </div>
+                
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-user fa-2x" style="color: #072956;"></i>
+                            </div>
+                            <div>
+                                <h5>ภาษีบุคคลธรรมดา</h5>
+                                <p class="mb-0">ภาษีจากรายได้ของบุคคลธรรมดาในแต่ละปี</p>
+                                <a href="components/basic-taxes.html#personalTaxInfo" class="btn btn-sm btn-learn mt-2">เรียนรู้เพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-building fa-2x" style="color: #072956;"></i>
+                            </div>
+                            <div>
+                                <h5>ภาษีนิติบุคคล</h5>
+                                <p class="mb-0">ภาษีจากกำไรของบริษัทหรือองค์กรธุรกิจ</p>
+                                <a href="components/basic-taxes.html#corporateTaxInfo" class="btn btn-sm btn-learn mt-2">เรียนรู้เพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-receipt fa-2x" style="color: #072956;"></i>
+                            </div>
+                            <div>
+                                <h5>ภาษีมูลค่าเพิ่ม</h5>
+                                <p class="mb-0">ภาษีจากการขายสินค้าหรือบริการ (VAT)</p>
+                                <a href="components/basic-taxes.html#vatInfo" class="btn btn-sm btn-learn mt-2">เรียนรู้เพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mt-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-sign fa-2x" style="color: #072956;"></i>
+                            </div>
+                            <div>
+                                <h5>ภาษีป้าย</h5>
+                                <p class="mb-0">ภาษีจากการติดป้ายโฆษณาหรือป้ายร้านค้า</p>
+                                <a href="components/local-taxes.html#signTaxInfo" class="btn btn-sm btn-learn mt-2">เรียนรู้เพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mt-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-home fa-2x" style="color: #072956;"></i>
+                            </div>
+                            <div>
+                                <h5>ภาษีที่ดินและสิ่งปลูกสร้าง</h5>
+                                <p class="mb-0">ภาษีจากการเป็นเจ้าของที่ดินและอาคาร</p>
+                                <a href="components/local-taxes.html#landTaxInfo" class="btn btn-sm btn-learn mt-2">เรียนรู้เพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-4 mt-4">
+                        <div class="d-flex">
+                            <div class="me-3">
+                                <i class="fas fa-wine-bottle fa-2x" style="color: #072956;"></i>
+                            </div>
+                            <div>
+                                <h5>ภาษีสรรพสามิต</h5>
+                                <p class="mb-0">ภาษีสินค้าฟุ่มเฟือยหรือสินค้าเฉพาะ</p>
+                                <a href="components/special-taxes.html#exciseTaxInfo" class="btn btn-sm btn-learn mt-2">เรียนรู้เพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tax Deadline Reminder -->
+        <section class="py-5">
+            <div class="container">
+                <div class="alert alert-primary" role="alert">
+                    <div class="d-flex align-items-center">
+                        <div class="me-3">
+                            <i class="fas fa-calendar-exclamation fa-2x"></i>
+                        </div>
+                        <div>
+                            <h4 class="alert-heading mb-1">กำหนดยื่นภาษีเงินได้บุคคลธรรมดา ปี 2567</h4>
+                            <p class="mb-0">ยื่นแบบ ภ.ง.ด.90 และ ภ.ง.ด.91 ภายในวันที่ 31 มีนาคม 2568</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">เตรียมเอกสารให้พร้อม</h5>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item border-0">ใบเสร็จรับเงินค่าลดหย่อนต่างๆ</li>
+                                    <li class="list-group-item border-0">หนังสือรับรองการหักภาษี ณ ที่จ่าย (ภ.ง.ด.1ก, ภ.ง.ด.1ก (พิเศษ))</li>
+                                    <li class="list-group-item border-0">เอกสารแสดงรายได้จากแหล่งต่างๆ</li>
+                                    <li class="list-group-item border-0">บัตรประชาชนและทะเบียนบ้าน</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mt-4 mt-md-0">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h5 class="card-title">วิธีการยื่นแบบภาษี</h5>
+                                <div class="d-flex mb-2">
+                                    <span class="badge bg-primary me-2">1</span>
+                                    <span>ยื่นแบบกระดาษที่สำนักงานสรรพากร</span>
+                                </div>
+                                <div class="d-flex mb-2">
+                                    <span class="badge bg-primary me-2">2</span>
+                                    <span>ยื่นแบบผ่านอินเทอร์เน็ต (e-Filing)</span>
+                                </div>
+                                <div class="d-flex mb-2">
+                                    <span class="badge bg-primary me-2">3</span>
+                                    <span>ยื่นแบบผ่านแอปพลิเคชัน RD Smart Tax</span>
+                                </div>
+                                <a href="components/tax-related.html" class="btn btn-sm mt-3" style="background-color: #072956; color: white;">ดูรายละเอียดเพิ่มเติม</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="section-title">คำถามที่พบบ่อย</h2>
+                    <p class="text-muted">ตอบคำถามเกี่ยวกับภาษีที่คนมักสงสัย</p>
+                </div>
+                
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item border-0 shadow-sm mb-3">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                ใครบ้างที่ต้องยื่นแบบแสดงรายการภาษีเงินได้บุคคลธรรมดา?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                ผู้ที่มีเงินได้เกิน 60,000 บาทต่อปี (สำหรับบุคคลโสด) หรือ 120,000 บาทต่อปี (สำหรับคู่สมรส) ต้องยื่นแบบแสดงรายการภาษีเงินได้บุคคลธรรมดา แม้ว่าจะไม่มีภาษีต้องชำระก็ตาม
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 shadow-sm mb-3">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                หากยื่นแบบภาษีล่าช้าจะมีโทษอย่างไร?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                การยื่นแบบล่าช้าอาจต้องเสียเงินเพิ่ม 1.5% ต่อเดือนของภาษีที่ต้องชำระ และค่าปรับไม่เกิน 2,000 บาท กรณีไม่มีภาษีต้องชำระอาจเสียเฉพาะค่าปรับ
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 shadow-sm mb-3">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                สามารถขอคืนภาษีได้ในกรณีใดบ้าง?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                สามารถขอคืนภาษีได้หากมีการหักภาษี ณ ที่จ่ายมากกว่าภาษีที่ต้องชำระจริง หรือมีค่าลดหย่อนที่ยังไม่ได้ใช้สิทธิ์ โดยต้องยื่นคำร้องภายใน 3 ปีนับจากวันสุดท้ายของการยื่นแบบ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <h5 class="mb-4">TAXES YALA BIZ</h5>
+                        <p>ให้คำปรึกษาด้านภาษีและบริการคำนวณภาษีออนไลน์ สำหรับบุคคลและธุรกิจในจังหวัดยะลาและทั่วประเทศไทย</p>
+                        <div class="d-flex gap-3 mt-3">
+                            <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                        <h5 class="mb-4">ลิงก์ด่วน</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="components/tax-calculator.html" class="text-white text-decoration-none">คำนวณภาษี</a></li>
+                            <li class="mb-2"><a href="components/basic-taxes.html" class="text-white text-decoration-none">ภาษีพื้นฐาน</a></li>
+                            <li class="mb-2"><a href="components/local-taxes.html" class="text-white text-decoration-none">ภาษีท้องถิ่น</a></li>
+                            <li class="mb-2"><a href="components/special-taxes.html" class="text-white text-decoration-none">ภาษีเฉพาะกิจ</a></li>
+                            <li class="mb-2"><a href="components/tax-related.html" class="text-white text-decoration-none">ข้อมูลภาษี</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="text-center">
+                    <p class="mb-0">&copy; 2023 TAXES YALA BIZ. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
