@@ -58,65 +58,42 @@
         }
         
         // Update sign tax rate based on selected type
-        function updateSignRate() {
-            const signType = document.getElementById('signType').value;
-            let rate = 0;
-            
-            switch(signType) {
-                case '1': // Thai signs
-                    rate = 20;
-                    break;
-                case '2': // Non-Thai signs
-                    rate = 40;
-                    break;
-                case '3': // Mixed signs
-                    rate = 30;
-                    break;
-            }
-            
-            document.getElementById('signRate').value = rate;
-        }
-        
-        // Calculate sign tax
-        function calculateSignTax() {
-            const signSize = parseFloat(document.getElementById('signSize').value) || 0;
-            const signAmount = parseInt(document.getElementById('signAmount').value) || 1;
-            const taxRate = parseFloat(document.getElementById('signRate').value) || 0;
-            
-            const totalArea = signSize * signAmount;
-            const taxAmount = totalArea * taxRate;
-            
-            // Display results
-            document.getElementById('taxRate').textContent = taxRate;
-            document.getElementById('totalArea').textContent = totalArea.toFixed(2);
-            document.getElementById('signTaxAmount').textContent = taxAmount.toFixed(2);
-            document.getElementById('signTaxResult').style.display = 'block';
-        }
-        
-        // Print result function
-        function printResult(elementId) {
-            const printContent = document.getElementById(elementId).innerHTML;
-            const originalContent = document.body.innerHTML;
-            
-            document.body.innerHTML = printContent;
-            window.print();
-            document.body.innerHTML = originalContent;
-            location.reload();
-        }
-        
-        // Initialize sign tax rate on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            updateSignRate();
-            
-            // Auto-calculate expenses when income changes
-            document.getElementById('income').addEventListener('input', function() {
-                const income = parseFloat(this.value) || 0;
-                let expenses = income * 0.4;
-                if (expenses > 100000) expenses = 100000;
-                document.getElementById('expenses').value = expenses.toFixed(2);
-            });
-        });
+            function calculateSignTax() {
+            const type = document.getElementById("signType").value;
+            const kind = document.getElementById("signKind").value;
+            const size = parseFloat(document.getElementById("signSize").value);
+            const amount = parseInt(document.getElementById("signAmount").value);
 
+            if (isNaN(size) || size <= 0 || isNaN(amount) || amount <= 0) {
+                alert("กรุณากรอกข้อมูลให้ครบถ้วน");
+                return;
+            }
+
+            let rate = 0;
+            if (type === "1") rate = (kind === "normal") ? 5 : 10;
+            if (type === "2") rate = (kind === "normal") ? 26 : 52;
+            if (type === "3") rate = (kind === "normal") ? 50 : 52;
+
+            const totalArea = size * amount;
+            let tax = totalArea * rate;
+            if (tax < 200) tax = 200; // ขั้นต่ำ 200
+
+            document.getElementById("taxRate").innerText = rate;
+            document.getElementById("totalArea").innerText = totalArea;
+            document.getElementById("signTaxAmount").innerText = tax.toLocaleString();
+
+            document.getElementById("signTaxResult").classList.remove("d-none");
+            }
+
+            function printResult(id) {
+            const printContent = document.getElementById(id).innerHTML;
+            const newWin = window.open('', '', 'width=600,height=400');
+            newWin.document.write('<html><head><title>ผลการคำนวณภาษีป้าย</title></head><body>');
+            newWin.document.write(printContent);
+            newWin.document.write('</body></html>');
+            newWin.document.close();
+            newWin.print();
+            }
         // auto close dropdown-menu //
         document.querySelectorAll('.navbar-nav .dropdown-item').forEach(function(element) {
           element.addEventListener('click', function() {

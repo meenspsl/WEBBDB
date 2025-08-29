@@ -1,13 +1,27 @@
-:root {
-            --primary-color: #072956;
-            --secondary-color: #f08018;
-            --light-color: #ffffff;
-            --dark-color: #000000;
+        :root {
+            --primary-color: #10284c;
+            --secondary-color: #f9a516;
+            --light-bg: #f8f9fa;
+            --text-color: #333;
+            --light-text: #6c757d;
         }
         
         body {
-            font-family: 'Sarabun', sans-serif;
-            padding-top: 80px;
+            font-family: 'Sarabun', 'Kanit', sans-serif;
+            background-color: #fff;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 60px;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a3c6e 100%);
+            color: white;
+            padding: 20px 15px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
 
         .logo-img {
@@ -20,8 +34,8 @@
 
         
 .navbar {
-    background-color: #1e1e1e !important;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #0f0f0f 0%, #2b2b2b 100%) !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
 .navbar-brand, .nav-link {
@@ -105,14 +119,14 @@
         }
         
         .section-title {
-            color: var(--primary-color);
+            color: linear-gradient(135deg, var(--primary-color) 0%, #1a3c6e 100%);
             border-bottom: 2px solid var(--secondary-color);
             padding-bottom: 10px;
             margin-bottom: 30px;
         }
         
         footer {
-            background-color: var(--primary-color);
+            background-color: #1e1e1e;
             color: white;
             padding: 30px 0;
             margin-top: 50px;
@@ -214,19 +228,86 @@
             font-weight: 500;
         }
         
-        @media (max-width: 768px) {
-            body {
-                padding-top: 70px;
+        .hero-section {
+    padding: 120px 0 80px;
+    position: relative;
+}
+
+        .min-vh-80 {
+            min-height: 80vh;
+        }
+
+        .hero-card {
+            background: white;
+            border-radius: 12px;
+        }
+
+        .feature-card {
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1) !important;
+        }
+
+        .feature-icon {
+            height: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(7, 41, 86, 0.1);
+            color: #072956;
+            font-weight: 600;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+            border-color: rgba(0,0,0,.125);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 992px) {
+            .hero-section {
+                padding: 100px 0 60px;
+                text-align: center;
             }
             
-            .table-responsive {
-                overflow-x: auto;
+            .display-4 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 90px 0 40px;
+            }
+            
+            .display-4 {
+                font-size: 2rem;
             }
         }
 
         .navbar {
              box-shadow: 0 2px 8px rgba(7, 41, 86, 0.15);
-}
+        }
+
+        .btn-learn {
+            background-color: #072956;
+            color: white !important;
+            border-radius: 6px;
+            padding: 5px 12px;
+            font-size: 0.9rem;
+            display: inline-block;
+            transition: background 0.3s;
+        }
+        .btn-learn:hover {
+            background-color: #051e42;
+            color: #fff !important;
+        }
 
         /* Mobile responsiveness */
         @media (max-width: 768px) {

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>คำนวณภาษี</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../css/styles.css">
 </head>
@@ -120,8 +121,14 @@
                             </div>
                         </div>
                         
-                        <button type="button" class="btn btn-primary" onclick="calculatePersonalTax()">คำนวณภาษี</button>
-                        <button type="reset" class="btn btn-outline-secondary">ล้างข้อมูล</button>
+                        <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-sm" style="background-color:#f08018; color:white;" onclick="calculatePersonalTax()">
+                                <i class="fas fa-calculator me-2"></i> คำนวณภาษี
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-undo me-2"></i> ล้างข้อมูล
+                            </button>
+                        </div>
                     </form>
                     
                     <div id="personalTaxResult" class="result-box" style="display: none;">
@@ -129,58 +136,107 @@
                         <p>รายได้สุทธิ: <span id="netIncome">0</span> บาท</p>
                         <p>ภาษีที่ต้องชำระ: <span id="taxAmount">0</span> บาท</p>
                         <p>ภาษีหลังจากหักค่าลดหย่อน: <span id="finalTax">0</span> บาท</p>
-                        <button class="btn btn-secondary mt-2" onclick="printResult('personalTaxResult')">พิมพ์ผลลัพธ์</button>
                     </div>
                 </div>
+                </div>
             </div>
+
+            
             
             <!-- Sign Tax Calculator -->
             <div id="signTaxCalc" class="calculator-card card mb-5">
+                            <div id="personalTaxCalc" class="calculator-card card mb-5">
                 <div class="calculator-header">
-                    <h3><i class="bi bi-signpost-fill"></i> ภาษีป้าย</h3>
+                    <h3><i class="bi bi-person-fill"></i> คำนวณภาษีป้าย</h3>
                 </div>
-                <div class="card-body">
-                    <form id="signTaxForm">
-                        <div class="row mb-3">
+
+                    <div class="row">
+                    <div class="col-md-6">
+                    <!-- กล่องคำนวณภาษีป้าย -->
+                        <div class="card-body">
+                        <form id="signTaxForm">
+                            <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="signType" class="form-label">ประเภทป้าย</label>
-                                <select class="form-select" id="signType" onchange="updateSignRate()">
-                                    <option value="1">ป้ายที่มีคำภาษาไทย</option>
-                                    <option value="2">ป้ายที่ไม่มีคำภาษาไทย</option>
-                                    <option value="3">ป้ายที่มีทั้งคำไทยและภาษาต่างประเทศ</option>
+                                <select class="form-select" id="signType" required>
+                                <option value="1">ประเภท 1: อักษรไทยล้วน</option>
+                                <option value="2">ประเภท 2: ไทย + ภาษาอื่น/ภาพ/เครื่องหมาย</option>
+                                <option value="3">ประเภท 3: ไม่มีอักษรไทย หรือไทยอยู่ใต้ภาษาต่างประเทศ</option>
                                 </select>
                             </div>
                             <div class="col-md-6">
-                                <label for="signSize" class="form-label">ขนาดป้าย (ตารางเมตร)</label>
-                                <input type="number" class="form-control" id="signSize" min="0.1" step="0.1" required>
+                                <label for="signKind" class="form-label">ชนิดป้าย</label>
+                                <select class="form-select" id="signKind" required>
+                                <option value="normal">ป้ายทั่วไป</option>
+                                <option value="light">ป้ายไฟวิ่ง</option>
+                                </select>
                             </div>
-                        </div>
-                        
-                        <div class="row mb-3">
+                            </div>
+
+                            <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="signRate" class="form-label">อัตราภาษี (บาท/ตารางเมตร)</label>
-                                <input type="number" class="form-control" id="signRate" readonly>
+                                <label for="signSize" class="form-label">ขนาดป้าย (ตร.ม.)</label>
+                                <input type="number" class="form-control" id="signSize" min="0.1" step="0.1" required>
                             </div>
                             <div class="col-md-6">
                                 <label for="signAmount" class="form-label">จำนวนป้าย</label>
                                 <input type="number" class="form-control" id="signAmount" value="1" min="1" required>
                             </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-sm" style="background-color:#f08018; color:white;" onclick="calculateSignTax()">
+                                <i class="fas fa-calculator me-2"></i> คำนวณภาษี
+                            </button>
+                            <button type="reset" class="btn btn-outline-secondary btn-sm">
+                                <i class="fas fa-undo me-2"></i> ล้างข้อมูล
+                            </button>
+                            </div>
+                        </form>
+
+                        <!-- ผลลัพธ์ -->
+                        <div id="signTaxResult" class="alert alert-info mt-4 d-none">
+                            <h5><i class="fas fa-receipt me-2"></i> ผลการคำนวณภาษีป้าย</h5>
+                            <p>อัตราภาษี: <span id="taxRate">0</span> บาท/ตร.ม.</p>
+                            <p>พื้นที่รวม: <span id="totalArea">0</span> ตร.ม.</p>
+                            <p>ภาษีที่ต้องชำระ: <strong class="text-danger"><span id="signTaxAmount">0</span> บาท</strong></p>
                         </div>
-                        
-                        <button type="button" class="btn btn-primary" onclick="calculateSignTax()">คำนวณภาษี</button>
-                        <button type="reset" class="btn btn-outline-secondary">ล้างข้อมูล</button>
-                    </form>
-                    
-                    <div id="signTaxResult" class="result-box" style="display: none;">
-                        <h4>ผลการคำนวณภาษีป้าย</h4>
-                        <p>อัตราภาษี: <span id="taxRate">0</span> บาท/ตารางเมตร</p>
-                        <p>พื้นที่ป้ายทั้งหมด: <span id="totalArea">0</span> ตารางเมตร</p>
-                        <p>ภาษีป้ายที่ต้องชำระ: <span id="signTaxAmount">0</span> บาท</p>
-                        <button class="btn btn-secondary mt-2" onclick="printResult('signTaxResult')">พิมพ์ผลลัพธ์</button>
+                        </div>
                     </div>
-                </div>
+                    </div>         
             </div>
         </section>
+
+            <!-- Footer -->
+        <footer class="bg-dark text-white py-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <h5 class="mb-4">TAXES YALA BIZ</h5>
+                        <p>ให้คำปรึกษาด้านภาษีและบริการคำนวณภาษีออนไลน์ สำหรับบุคคลและธุรกิจในจังหวัดยะลาและทั่วประเทศไทย</p>
+                        <div class="d-flex gap-3 mt-3">
+                            <a href="#" class="text-white"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="text-white"><i class="fab fa-line"></i></a>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-4 mb-4 mb-md-0">
+                        <h5 class="mb-4">ลิงก์ด่วน</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="components/tax-calculator.html" class="text-white text-decoration-none">คำนวณภาษี</a></li>
+                            <li class="mb-2"><a href="components/basic-taxes.html" class="text-white text-decoration-none">ภาษีพื้นฐาน</a></li>
+                            <li class="mb-2"><a href="components/local-taxes.html" class="text-white text-decoration-none">ภาษีท้องถิ่น</a></li>
+                            <li class="mb-2"><a href="components/special-taxes.html" class="text-white text-decoration-none">ภาษีเฉพาะกิจ</a></li>
+                            <li class="mb-2"><a href="components/tax-related.html" class="text-white text-decoration-none">ข้อมูลภาษี</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="text-center">
+                    <p class="mb-0">&copy; 2023 TAXES YALA BIZ. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/main.js"></script>
