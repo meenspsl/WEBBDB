@@ -1,0 +1,7 @@
+[build]
+  publish = "."
+  command = ""
+
+# (Optional) ถ้ามี functions
+[functions]
+  directory = "netlify/functions"
